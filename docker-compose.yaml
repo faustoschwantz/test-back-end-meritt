@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:13
+    container_name: meritt_db
+    restart: always
+    tty: true
+    environment:
+      - POSTGRES_DB=meritt
+      - POSTGRES_USER=meritt
+      - POSTGRES_PASSWORD=root
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+volumes:
+  db-data:
