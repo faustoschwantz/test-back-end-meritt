@@ -1,4 +1,4 @@
-import { ExamTypes } from './../../shared/types/exam.type';
+import { ExamTypes } from 'src/shared/types/exam';
 
 export class Exam {
   id: string;
