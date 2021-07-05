@@ -17,7 +17,7 @@ import { ConfigModule } from '@nestjs/config';
       username: process.env.TYPEORM_USERNAME,
       password: process.env.TYPEORM_PASSWORD,
       database: process.env.TYPEORM_DATABASE,
-      entities: [process.env.TYPEORM_ENTITIES],
+      autoLoadEntities: true,
       migrations: [process.env.TYPEORM_MIGRATIONS],
       cli: {
         migrationsDir: process.env.TYPEORM_MIGRATIONS_DIR,
