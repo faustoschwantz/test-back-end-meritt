@@ -17,21 +17,20 @@ export class OptionsService {
     return this.optionsRepository.save(option);
   }
 
-  findAll(): Promise<Option[]> {
-    return this.optionsRepository.find();
+  findAll(questionId: string): Promise<Option[]> {
+    return this.optionsRepository.find({ where: { questionId } });
   }
 
-  findOne(id: number): Promise<Option> {
-    return this.optionsRepository.findOne(id);
+  findOne(id: string, questionId: string): Promise<Option> {
+    return this.optionsRepository.findOne({ where: { id, questionId } });
   }
 
-  async update(id: number, updateOptionDto: UpdateOptionDto): Promise<number> {
-    const option = await this.optionsRepository.update(id, updateOptionDto);
-    return option.affected;
+  async update(id: string, updateOptionDto: UpdateOptionDto): Promise<void> {
+    await this.optionsRepository.update(id, updateOptionDto);
+    return;
   }
 
-  async remove(id: number): Promise<number> {
-    const option = await this.optionsRepository.delete(id);
-    return option.affected;
+  async remove(id: string, questionId: string): Promise<void> {
+    await this.optionsRepository.delete({ id, questionId });
   }
 }

@@ -13,4 +13,7 @@ export class Option {
 
   @Column()
   correct: boolean;
+
+  @Column()
+  questionId: string;
 }
