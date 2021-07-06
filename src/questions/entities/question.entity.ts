@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Exam } from 'src/exams/entities/exam.entity';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('questions')
 export class Question {
@@ -7,4 +8,10 @@ export class Question {
 
   @Column()
   statement: string;
+
+  @Column()
+  examId: string;
+
+  @ManyToOne(() => Exam, (exam) => exam.questions)
+  exam: Exam;
 }
