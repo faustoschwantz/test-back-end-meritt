@@ -1,4 +1,4 @@
-import { ExamTypes } from 'src/shared/types/exam';
+import { ExamTypes } from './../../shared/types/exam';
 
 export class CreateExamDto {
   name: string;
