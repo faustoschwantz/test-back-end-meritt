@@ -27,7 +27,11 @@ export class AlterOptions1625530517187 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('options', 'questionId');
+    const table = await queryRunner.getTable('options');
+    const foreignKey = table.foreignKeys.find(
+      (fk) => fk.columnNames.indexOf('questionId') !== -1,
+    );
+    await queryRunner.dropForeignKey('options', foreignKey);
     await queryRunner.dropColumn('options', 'questionId');
   }
 }
