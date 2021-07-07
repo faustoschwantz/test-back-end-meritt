@@ -1,12 +1,12 @@
+import { Option } from './entities/option.entity';
 import {
   Controller,
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
-  NotFoundException,
+  Put,
 } from '@nestjs/common';
 import { OptionsService } from './options.service';
 import { CreateOptionDto } from './dto/create-option.dto';
@@ -20,42 +20,37 @@ export class OptionsController {
   create(
     @Param('questionId') questionId: string,
     @Body() createOptionDto: CreateOptionDto,
-  ) {
-    return this.optionsService.create({ ...createOptionDto, questionId });
+  ): Promise<Option> {
+    return this.optionsService.create(questionId, createOptionDto);
   }
 
   @Get()
-  async findAll(@Param('questionId') questionId: string) {
-    const options = await this.optionsService.findAll(questionId);
-
-    if (options.length === 0) throw new NotFoundException();
-
-    return options;
+  findAll(@Param('questionId') questionId: string): Promise<Option[]> {
+    return this.optionsService.findAll(questionId);
   }
 
   @Get(':id')
-  async findOne(
+  findOne(
     @Param('questionId') questionId: string,
     @Param('id') id: string,
-  ) {
-    const option = await this.optionsService.findOne(id, questionId);
-
-    if (option === undefined) throw new NotFoundException();
-
-    return option;
+  ): Promise<Option> {
+    return this.optionsService.findOne(id, questionId);
   }
 
-  @Patch(':id')
+  @Put(':id')
   update(
     @Param('questionId') questionId: string,
     @Param('id') id: string,
     @Body() updateOptionDto: UpdateOptionDto,
-  ) {
-    return this.optionsService.update(id, { ...updateOptionDto, questionId });
+  ): Promise<void> {
+    return this.optionsService.update(id, questionId, updateOptionDto);
   }
 
   @Delete(':id')
-  remove(@Param('questionId') questionId: string, @Param('id') id: string) {
+  remove(
+    @Param('questionId') questionId: string,
+    @Param('id') id: string,
+  ): Promise<void> {
     return this.optionsService.remove(id, questionId);
   }
 }

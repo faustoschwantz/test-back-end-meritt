@@ -12,8 +12,14 @@ export class OptionsService {
     private optionsRepository: Repository<Option>,
   ) {}
 
-  create(createOptionDto: CreateOptionDto): Promise<Option> {
-    const option = this.optionsRepository.create(createOptionDto);
+  create(
+    questionId: string,
+    createOptionDto: CreateOptionDto,
+  ): Promise<Option> {
+    const option = this.optionsRepository.create({
+      ...createOptionDto,
+      questionId,
+    });
     return this.optionsRepository.save(option);
   }
 
@@ -25,8 +31,12 @@ export class OptionsService {
     return this.optionsRepository.findOne({ where: { id, questionId } });
   }
 
-  async update(id: string, updateOptionDto: UpdateOptionDto): Promise<void> {
-    await this.optionsRepository.update(id, updateOptionDto);
+  async update(
+    id: string,
+    questionId: string,
+    updateOptionDto: UpdateOptionDto,
+  ): Promise<void> {
+    await this.optionsRepository.update({ id, questionId }, updateOptionDto);
     return;
   }
 
