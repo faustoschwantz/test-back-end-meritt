@@ -13,7 +13,7 @@ export class Exam {
   description: string;
 
   @Column()
-  type: number;
+  type: string;
 
   @OneToMany(() => Question, (question) => question.exam)
   questions: Question[];

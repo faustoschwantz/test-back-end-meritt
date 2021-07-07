@@ -12,23 +12,24 @@ export class ExamsService {
     private examsRepository: Repository<Exam>,
   ) {}
 
-  create(createExamDto: CreateExamDto) {
-    return 'This action adds a new exam';
+  create(createExamDto: CreateExamDto): Promise<Exam> {
+    const exam = this.examsRepository.create(createExamDto);
+    return this.examsRepository.save(exam);
   }
 
-  findAll() {
-    return `This action returns all exams`;
+  findAll(): Promise<Exam[]> {
+    return this.examsRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} exam`;
+  findOne(id: string) {
+    return this.examsRepository.findOne(id);
   }
 
-  update(id: number, updateExamDto: UpdateExamDto) {
-    return `This action updates a #${id} exam`;
+  update(id: string, updateExamDto: UpdateExamDto): void {
+    this.examsRepository.update(id, updateExamDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} exam`;
+  remove(id: string): void {
+    this.examsRepository.delete(id);
   }
 }
