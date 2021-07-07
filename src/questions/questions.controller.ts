@@ -1,3 +1,4 @@
+import { sortRandomArray } from './../shared/utils/array';
 import { Question } from './entities/question.entity';
 import {
   Controller,
@@ -25,8 +26,15 @@ export class QuestionsController {
   }
 
   @Get()
-  findAll(@Param('examId') examId: string): Promise<Question[]> {
-    return this.questionsService.findAll(examId);
+  async findAll(@Param('examId') examId: string): Promise<Question[]> {
+    const questions = await this.questionsService.findAll(examId);
+
+    const questionsRandomOptions = questions.map((question) => {
+      const randomOptions = sortRandomArray(question.options);
+      return { ...question, options: randomOptions };
+    });
+
+    return questionsRandomOptions;
   }
 
   @Get(':id')

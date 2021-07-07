@@ -24,7 +24,10 @@ export class QuestionsService {
   }
 
   findAll(examId: string): Promise<Question[]> {
-    return this.questionsRepository.find({ where: { examId } });
+    return this.questionsRepository.find({
+      where: { examId },
+      relations: ['options'],
+    });
   }
 
   findOne(examId: string, id: string): Promise<Question> {
