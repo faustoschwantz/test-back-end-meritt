@@ -1,4 +1,8 @@
-import { ApiTags } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiInternalServerErrorResponse,
+  ApiOkResponse,
+} from '@nestjs/swagger';
 import { Option } from './entities/option.entity';
 import {
   Controller,
@@ -14,11 +18,13 @@ import { CreateOptionDto } from './dto/create-option.dto';
 import { UpdateOptionDto } from './dto/update-option.dto';
 
 @ApiTags('Questions/Options')
+@ApiInternalServerErrorResponse()
 @Controller('questions/:questionId/options')
 export class OptionsController {
   constructor(private readonly optionsService: OptionsService) {}
 
   @Post()
+  @ApiOkResponse({ type: Option })
   create(
     @Param('questionId') questionId: string,
     @Body() createOptionDto: CreateOptionDto,
@@ -27,11 +33,13 @@ export class OptionsController {
   }
 
   @Get()
+  @ApiOkResponse({ type: [Option] })
   findAll(@Param('questionId') questionId: string): Promise<Option[]> {
     return this.optionsService.findAll(questionId);
   }
 
   @Get(':id')
+  @ApiOkResponse({ type: Option })
   findOne(
     @Param('questionId') questionId: string,
     @Param('id') id: string,
