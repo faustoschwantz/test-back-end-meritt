@@ -23,6 +23,8 @@ export class Option {
   @Column()
   questionId: string;
 
-  @ManyToOne(() => Question, (question) => question.options)
+  @ManyToOne(() => Question, (question) => question.options, {
+    onDelete: 'CASCADE',
+  })
   question: Question;
 }
