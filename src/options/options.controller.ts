@@ -1,3 +1,4 @@
+import { ApiTags } from '@nestjs/swagger';
 import { Option } from './entities/option.entity';
 import {
   Controller,
@@ -12,6 +13,7 @@ import { OptionsService } from './options.service';
 import { CreateOptionDto } from './dto/create-option.dto';
 import { UpdateOptionDto } from './dto/update-option.dto';
 
+@ApiTags('Questions/Options')
 @Controller('questions/:questionId/options')
 export class OptionsController {
   constructor(private readonly optionsService: OptionsService) {}

@@ -11,22 +11,33 @@ import {
 import { ExamsService } from './exams.service';
 import { CreateExamDto } from './dto/create-exam.dto';
 import { UpdateExamDto } from './dto/update-exam.dto';
+import {
+  ApiTags,
+  ApiInternalServerErrorResponse,
+  ApiCreatedResponse,
+  ApiOkResponse,
+} from '@nestjs/swagger';
 
+@ApiTags('Exams')
 @Controller('exams')
+@ApiInternalServerErrorResponse()
 export class ExamsController {
   constructor(private readonly examsService: ExamsService) {}
 
   @Post()
+  @ApiCreatedResponse()
   create(@Body() createExamDto: CreateExamDto) {
     return this.examsService.create(createExamDto);
   }
 
   @Get()
+  @ApiOkResponse({ type: [Exam] })
   async findAll(): Promise<Exam[]> {
     return this.examsService.findAll();
   }
 
   @Get(':id')
+  @ApiOkResponse({ type: Exam })
   findOne(@Param('id') id: string): Promise<Exam> {
     return this.examsService.findOne(id);
   }
