@@ -19,8 +19,8 @@ import {
 } from '@nestjs/swagger';
 
 @ApiTags('Exams')
-@Controller('exams')
 @ApiInternalServerErrorResponse()
+@Controller('exams')
 export class ExamsController {
   constructor(private readonly examsService: ExamsService) {}
 

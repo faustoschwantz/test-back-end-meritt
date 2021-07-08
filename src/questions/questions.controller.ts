@@ -1,4 +1,9 @@
-import { ApiTags } from '@nestjs/swagger';
+import {
+  ApiCreatedResponse,
+  ApiTags,
+  ApiOkResponse,
+  ApiInternalServerErrorResponse,
+} from '@nestjs/swagger';
 import { sortRandomArray } from './../shared/utils/array';
 import { Question } from './entities/question.entity';
 import {
@@ -15,11 +20,13 @@ import { CreateQuestionDto } from './dto/create-question.dto';
 import { UpdateQuestionDto } from './dto/update-question.dto';
 
 @ApiTags('Exams/Questions')
-@Controller('exams/:examId/questions/')
+@ApiInternalServerErrorResponse()
+@Controller('exams/:examId/questions')
 export class QuestionsController {
   constructor(private readonly questionsService: QuestionsService) {}
 
   @Post()
+  @ApiCreatedResponse({ type: Question })
   create(
     @Param('examId') examId: string,
     @Body() createQuestionDto: CreateQuestionDto,
@@ -28,6 +35,7 @@ export class QuestionsController {
   }
 
   @Get()
+  @ApiOkResponse({ type: [Question] })
   async findAll(@Param('examId') examId: string): Promise<Question[]> {
     const questions = await this.questionsService.findAll(examId);
 
@@ -40,6 +48,7 @@ export class QuestionsController {
   }
 
   @Get(':id')
+  @ApiOkResponse({ type: Question })
   findOne(
     @Param('examId') examId: string,
     @Param('id') id: string,
