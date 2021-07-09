@@ -1,4 +1,4 @@
-import { sortRandomArray } from './../shared/utils/array';
+import { sortRandomArray } from './../../shared/utils/array';
 import { QuestionsService } from './../questions/questions.service';
 import { Question } from './../questions/entities/question.entity';
 import { Exam } from './entities/exam.entity';
@@ -20,7 +20,7 @@ import {
   ApiCreatedResponse,
   ApiOkResponse,
 } from '@nestjs/swagger';
-import { CreateQuestionDto } from 'src/questions/dto/create-question.dto';
+import { CreateQuestionDto } from './../questions/dto/create-question.dto';
 
 @ApiTags('Exams')
 @ApiInternalServerErrorResponse()

@@ -17,7 +17,7 @@ import {
 import { QuestionsService } from './questions.service';
 import { UpdateQuestionDto } from './dto/update-question.dto';
 import { OptionsService } from './../options/options.service';
-import { Option } from 'src/options/entities/option.entity';
+import { Option } from './../options/entities/option.entity';
 
 @ApiTags('Questions')
 @ApiInternalServerErrorResponse()

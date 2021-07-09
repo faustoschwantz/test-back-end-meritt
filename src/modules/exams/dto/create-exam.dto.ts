@@ -1,7 +1,7 @@
+import { ExamType } from './../../../shared/enums/exam-type';
+import { ExamTypes } from './../../../shared/types/exam';
 import { IsEnum, IsNotEmpty, IsString } from 'class-validator';
-import { ExamType } from './../../shared/enums/exam-type';
 import { ApiProperty } from '@nestjs/swagger';
-import { ExamTypes } from './../../shared/types/exam';
 
 export class CreateExamDto {
   @ApiProperty({ example: 'Prova AMARELA', description: 'O nome da prova' })
