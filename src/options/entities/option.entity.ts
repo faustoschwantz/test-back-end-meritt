@@ -1,6 +1,7 @@
 import { Question } from './../../questions/entities/question.entity';
 import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
+import { Exclude } from 'class-transformer';
 
 @Entity('options')
 export class Option {
@@ -20,6 +21,7 @@ export class Option {
   @Column()
   correct: boolean;
 
+  @Exclude()
   @Column()
   questionId: string;
 

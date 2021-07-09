@@ -4,15 +4,7 @@ import {
   ApiOkResponse,
 } from '@nestjs/swagger';
 import { Option } from './entities/option.entity';
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Param,
-  Delete,
-  Put,
-} from '@nestjs/common';
+import { Controller, Get, Body, Param, Delete, Put } from '@nestjs/common';
 import { OptionsService } from './options.service';
 import { UpdateOptionDto } from './dto/update-option.dto';
 
