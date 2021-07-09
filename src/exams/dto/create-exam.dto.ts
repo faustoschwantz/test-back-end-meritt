@@ -1,3 +1,4 @@
+import { ExamType } from './../../shared/enums/exam-type';
 import { ApiProperty } from '@nestjs/swagger';
 import { ExamTypes } from './../../shared/types/exam';
 
@@ -12,7 +13,7 @@ export class CreateExamDto {
   description: string;
 
   @ApiProperty({
-    example: 'ONLINE',
+    enum: ExamType,
     description: 'O tipo da prova: ONLINE ou OFFLINE',
   })
   type: ExamTypes;

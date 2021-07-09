@@ -1,3 +1,4 @@
+import { ExamType } from './../../shared/enums/exam-type';
 import { Question } from './../../questions/entities/question.entity';
 import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
@@ -16,7 +17,7 @@ export class Exam {
   @Column()
   description: string;
 
-  @ApiProperty()
+  @ApiProperty({ enum: ExamType })
   @Column()
   type: string;
 
