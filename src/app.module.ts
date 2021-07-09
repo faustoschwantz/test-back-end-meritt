@@ -6,23 +6,12 @@ import { QuestionsModule } from './modules/questions/questions.module';
 import { OptionsModule } from './modules/options/options.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
+import { typeormConfig } from './configs/typeorm';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    TypeOrmModule.forRoot({
-      type: process.env.TYPEORM_CONNECTION as any,
-      host: process.env.TYPEORM_HOST,
-      port: parseInt(process.env.TYPEORM_PORT),
-      username: process.env.TYPEORM_USERNAME,
-      password: process.env.TYPEORM_PASSWORD,
-      database: process.env.TYPEORM_DATABASE,
-      autoLoadEntities: true,
-      migrations: [process.env.TYPEORM_MIGRATIONS_DIST],
-      cli: {
-        migrationsDir: process.env.TYPEORM_MIGRATIONS_DIR,
-      },
-    }),
+    TypeOrmModule.forRoot(typeormConfig()),
     ExamsModule,
     QuestionsModule,
     OptionsModule,
