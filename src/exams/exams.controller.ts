@@ -1,3 +1,6 @@
+import { sortRandomArray } from './../shared/utils/array';
+import { QuestionsService } from './../questions/questions.service';
+import { Question } from './../questions/entities/question.entity';
 import { Exam } from './entities/exam.entity';
 import {
   Controller,
@@ -17,12 +20,16 @@ import {
   ApiCreatedResponse,
   ApiOkResponse,
 } from '@nestjs/swagger';
+import { CreateQuestionDto } from 'src/questions/dto/create-question.dto';
 
 @ApiTags('Exams')
 @ApiInternalServerErrorResponse()
 @Controller('exams')
 export class ExamsController {
-  constructor(private readonly examsService: ExamsService) {}
+  constructor(
+    private readonly examsService: ExamsService,
+    private readonly questionsService: QuestionsService,
+  ) {}
 
   @Post()
   @ApiCreatedResponse()
@@ -50,5 +57,27 @@ export class ExamsController {
   @Delete(':id')
   remove(@Param('id') id: string): void {
     this.examsService.remove(id);
+  }
+
+  @Post(':examId/questions')
+  @ApiCreatedResponse({ type: Question })
+  createQuestion(
+    @Param('examId') examId: string,
+    @Body() createQuestionDto: CreateQuestionDto,
+  ): Promise<Question> {
+    return this.questionsService.create(examId, createQuestionDto);
+  }
+
+  @Get(':examId/questions')
+  @ApiOkResponse({ type: [Question] })
+  async findAllQuestions(@Param('examId') examId: string): Promise<Question[]> {
+    const questions = await this.questionsService.findAll(examId);
+
+    const questionsRandomOptions = questions.map((question) => {
+      const randomOptions = sortRandomArray(question.options);
+      return { ...question, options: randomOptions };
+    });
+
+    return questionsRandomOptions;
   }
 }

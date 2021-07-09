@@ -17,9 +17,7 @@ export class Question {
   @Column()
   examId: string;
 
-  @ManyToOne(() => Exam, (exam) => exam.questions, {
-    onDelete: 'CASCADE',
-  })
+  @ManyToOne(() => Exam, (exam) => exam.questions)
   exam: Exam;
 
   @ApiProperty({ type: [Option] })

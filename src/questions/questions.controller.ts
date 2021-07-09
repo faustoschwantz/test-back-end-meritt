@@ -1,10 +1,9 @@
+import { CreateOptionDto } from './../options/dto/create-option.dto';
 import {
-  ApiCreatedResponse,
   ApiTags,
   ApiOkResponse,
   ApiInternalServerErrorResponse,
 } from '@nestjs/swagger';
-import { sortRandomArray } from './../shared/utils/array';
 import { Question } from './entities/question.entity';
 import {
   Controller,
@@ -16,57 +15,50 @@ import {
   Put,
 } from '@nestjs/common';
 import { QuestionsService } from './questions.service';
-import { CreateQuestionDto } from './dto/create-question.dto';
 import { UpdateQuestionDto } from './dto/update-question.dto';
+import { OptionsService } from './../options/options.service';
+import { Option } from 'src/options/entities/option.entity';
 
-@ApiTags('Exams/Questions')
+@ApiTags('Questions')
 @ApiInternalServerErrorResponse()
-@Controller('exams/:examId/questions')
+@Controller('questions')
 export class QuestionsController {
-  constructor(private readonly questionsService: QuestionsService) {}
-
-  @Post()
-  @ApiCreatedResponse({ type: Question })
-  create(
-    @Param('examId') examId: string,
-    @Body() createQuestionDto: CreateQuestionDto,
-  ): Promise<Question> {
-    return this.questionsService.create(examId, createQuestionDto);
-  }
-
-  @Get()
-  @ApiOkResponse({ type: [Question] })
-  async findAll(@Param('examId') examId: string): Promise<Question[]> {
-    const questions = await this.questionsService.findAll(examId);
-
-    const questionsRandomOptions = questions.map((question) => {
-      const randomOptions = sortRandomArray(question.options);
-      return { ...question, options: randomOptions };
-    });
-
-    return questionsRandomOptions;
-  }
+  constructor(
+    private readonly questionsService: QuestionsService,
+    private readonly optionsService: OptionsService,
+  ) {}
 
   @Get(':id')
   @ApiOkResponse({ type: Question })
-  findOne(
-    @Param('examId') examId: string,
-    @Param('id') id: string,
-  ): Promise<Question> {
-    return this.questionsService.findOne(examId, id);
+  findOne(@Param('id') id: string): Promise<Question> {
+    return this.questionsService.findOne(id);
   }
 
   @Put(':id')
   update(
-    @Param('examId') examId: string,
     @Param('id') id: string,
     @Body() updateQuestionDto: UpdateQuestionDto,
   ): void {
-    this.questionsService.update(examId, id, updateQuestionDto);
+    this.questionsService.update(id, updateQuestionDto);
   }
 
   @Delete(':id')
-  remove(@Param('examId') examId: string, @Param('id') id: string): void {
-    return this.questionsService.remove(examId, id);
+  remove(@Param('id') id: string): void {
+    return this.questionsService.remove(id);
+  }
+
+  @Post(':questionId/options')
+  @ApiOkResponse({ type: Option })
+  createOption(
+    @Param('questionId') questionId: string,
+    @Body() createOptionDto: CreateOptionDto,
+  ): Promise<Option> {
+    return this.optionsService.create(questionId, createOptionDto);
+  }
+
+  @Get(':questionId/options')
+  @ApiOkResponse({ type: [Option] })
+  findAllOptions(@Param('questionId') questionId: string): Promise<Option[]> {
+    return this.optionsService.findAll(questionId);
   }
 }

@@ -20,6 +20,7 @@ export class Exam {
   @Column()
   type: string;
 
+  @ApiProperty({ type: () => Question })
   @OneToMany(() => Question, (question) => question.exam)
   questions: Question[];
 }

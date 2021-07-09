@@ -27,20 +27,15 @@ export class OptionsService {
     return this.optionsRepository.find({ where: { questionId } });
   }
 
-  findOne(id: string, questionId: string): Promise<Option> {
-    return this.optionsRepository.findOne({ where: { id, questionId } });
+  findOne(id: string): Promise<Option> {
+    return this.optionsRepository.findOne(id);
   }
 
-  async update(
-    id: string,
-    questionId: string,
-    updateOptionDto: UpdateOptionDto,
-  ): Promise<void> {
-    await this.optionsRepository.update({ id, questionId }, updateOptionDto);
-    return;
+  async update(id: string, updateOptionDto: UpdateOptionDto): Promise<void> {
+    await this.optionsRepository.update(id, updateOptionDto);
   }
 
-  async remove(id: string, questionId: string): Promise<void> {
-    await this.optionsRepository.delete({ id, questionId });
+  async remove(id: string): Promise<void> {
+    await this.optionsRepository.delete(id);
   }
 }

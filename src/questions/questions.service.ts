@@ -30,19 +30,15 @@ export class QuestionsService {
     });
   }
 
-  findOne(examId: string, id: string): Promise<Question> {
-    return this.questionsRepository.findOne({ where: { id, examId } });
+  findOne(id: string): Promise<Question> {
+    return this.questionsRepository.findOne(id);
   }
 
-  update(
-    examId: string,
-    id: string,
-    updateQuestionDto: UpdateQuestionDto,
-  ): void {
-    this.questionsRepository.update({ examId, id }, updateQuestionDto);
+  update(id: string, updateQuestionDto: UpdateQuestionDto): void {
+    this.questionsRepository.update(id, updateQuestionDto);
   }
 
-  remove(examId: string, id: string): void {
-    this.questionsRepository.delete({ id, examId });
+  remove(id: string): void {
+    this.questionsRepository.delete(id);
   }
 }
