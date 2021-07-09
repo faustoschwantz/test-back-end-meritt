@@ -73,7 +73,9 @@ export class ExamsController {
   async findAllQuestions(@Param('examId') examId: string): Promise<Question[]> {
     const questions = await this.questionsService.findAll(examId);
 
-    const questionsRandomOptions = questions.map((question) => {
+    const randomQuestions = sortRandomArray(questions);
+
+    const questionsRandomOptions = randomQuestions.map((question) => {
       const randomOptions = sortRandomArray(question.options);
       return { ...question, options: randomOptions };
     });
