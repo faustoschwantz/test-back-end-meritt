@@ -1,19 +1,60 @@
-version: '3'
+version: '3.8'
 
 services:
-  db:
+  api-development:
+    build:
+      context: .
+      target: development
+    container_name: meritt-api-dev
+    env_file: .docker/.env.development
+    entrypoint: dockerize -wait tcp://database:5432 -timeout 30s ./.docker/entrypoint-development.sh
+    ports:
+      - 3000:3000
+      - 9229:9229
+    depends_on:
+      - database
+    volumes:
+      - .:/home/node/app
+      - /home/node/app/node_modules
+    networks:
+      - api-net
+
+  api-production:
+    build:
+      context: .
+      target: production
+    container_name: meritt-api-prod
+    env_file: .docker/.env.production
+    entrypoint: dockerize -wait tcp://database:5432 -timeout 30s ./.docker/entrypoint-production.sh
+    ports:
+      - 3000:3000
+    depends_on:
+      - database
+    volumes:
+      - .:/home/node/app
+      - /home/node/app/node_modules
+    networks:
+      - api-net
+
+  database:
     image: postgres:13
     container_name: meritt-db
     restart: always
     tty: true
+    ports:
+      - 5432:5432
     environment:
       - POSTGRES_DB=meritt
       - POSTGRES_USER=meritt
       - POSTGRES_PASSWORD=root
     volumes:
-      - db-data:/var/lib/postgresql/data
-    ports:
-      - 5432:5432
+      - db-volume:/var/lib/postgresql/data
+    networks:
+      - api-net
 
 volumes:
-  db-data:
+  db-volume:
+
+networks:
+  api-net:
+
