@@ -5,6 +5,9 @@
   "author": "Fausto Schwaantz <faustoschwantz@gmail.com>",
   "private": true,
   "license": "MIT",
+  "engines": {
+    "node": "14.x"
+  },
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
