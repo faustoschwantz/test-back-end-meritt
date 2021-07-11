@@ -1,14 +1,14 @@
 # Teste Back-end Developer
 
-- [Descrição](#Descrição)
-  - [Observações](#Observações)
-  - [Sobre o Nest.js](#Sobre-o-Nest.js)
-  - [Tecnologias](#Tecnologias)
-- [Instalação](#Instalação)
-- [Scripts](#NPM-Scripts)
-- [Docker](#Docker-Compose-Comandos)
-- [API](#API)
-- [Endpoints](#Endpoints)
+- [Descrição](#descrição)
+  - [Observações](#observações)
+  - [Sobre o Nest.js](#sobre-o-nestjs)
+  - [Tecnologias](#tecnologias)
+- [Instalação](#instalação)
+- [Scripts](#npm-Scripts)
+- [Docker](#docker-compose-comandos)
+- [API](#api)
+- [Endpoints](#endpoints)
 
 
 
