@@ -13,7 +13,6 @@ export const typeormConfig = (): TypeOrmModuleOptions => {
   if (process.env.DATABASE_URL)
     return {
       ...base,
-      ssl: true,
       url: process.env.DATABASE_URL,
     };
 
