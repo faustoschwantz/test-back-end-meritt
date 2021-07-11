@@ -3,7 +3,7 @@ import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 export const typeormConfig = (): TypeOrmModuleOptions => {
   return {
     type: process.env.TYPEORM_CONNECTION as any,
-    host: process.env.TYPEORM_HOST,
+    host: process.env.DATABASE_URL,
     port: parseInt(process.env.TYPEORM_PORT),
     username: process.env.TYPEORM_USERNAME,
     password: process.env.TYPEORM_PASSWORD,
