@@ -14,6 +14,11 @@ export const typeormConfig = (): TypeOrmModuleOptions => {
     return {
       ...base,
       ssl: true,
+      extra: {
+        ssl: {
+          rejectUnauthorized: false,
+        },
+      },
       url: process.env.DATABASE_URL,
     };
 
