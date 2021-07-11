@@ -1,73 +1,106 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+# Teste Back-end Developer
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Descrição
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Teste para vaga de [Back-End Developer](https://github.com/Meritts/test-back-end-meritt) na Meritt.</br>
+Conforme as especificações do teste, foi desenvolvido uma API REST para realizar operações de CRUD de provas e questões.
 
-## Description
+## Observações
+O endpoint GET /exams/:id/questions foi desenvolvida de forma para cumprir com o requisito funcional de obter as opções das questões de uma prova em ordem aleatória. Este endpoint retonar as questões e suas opções em ordem aletória, com objetivo de gerar provas com questões e opções com diferentes ordens.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Installation
+## Sobre o Nest.js
+Devido ao Nest.js ser uma framework de alto nível ele abstrai e facilita o uso de alguns recursos, dentre eles pode-se citar a estrutura do projeto divida em módulos, o uso de decorators para expor endpoints, o modo como realiza injeção de dependência com decorators e providers, o tratamento de erros e logs, a integrações como outras tecnologias, como OpenAPI/Swagger, TypeORM, Jest, class-validator, class-transform. Entre outras integrações e abtrações que ainda não consegui testar.
+
+## Tecnologias
+* Node.js
+* Nest.js
+* TypeScript
+* PostgreSQL
+* TypeORM
+* Git/GitHub
+* Heroku
+* Docker/Docker Compose
+* OpenAPI/Swagger
+* Jest
+
+
+
+## Instalação
 
 ```bash
+# instala as dependências do projeto
 $ npm install
 ```
 
-## Running the app
+## NPM Scripts
+Scripts uteis para desenvolvimento, teste, compilação e produção.
 
 ```bash
-# development
+# roda os testes unitários
+$ npm run test
+
+# visualiza a cobertura de testes
+$ npm run test:cov
+
+# roda a API em desenvolvimento
 $ npm run start
 
-# watch mode
+# proda a API em desenvolvimento com reload da aplicação
 $ npm run start:dev
 
-# production mode
+# roda a API em desenvolvimento com debug e reload da aplicação
+$ npm run start:debug
+
+# rodar a API em produção no heroku(executa as migrações e inicia a aplicação)
+$ npm run start:heroku
+
+# executa o CLI do typeorm(necessário para arquivos .ts)
+$ npm run typeorm
+
+# compila a API
+$ npm run build
+
+# executa em produção
 $ npm run start:prod
 ```
 
-## Test
-
+## Docker Compose Comandos
+Comandos para rodas a API no Docker. Nos serviços, api-development e api-production,o banco dados é iniciado automaticamente e as migrações são rodadas antes de subir a aplicação
 ```bash
-# unit tests
-$ npm run test
+# roda a aplicação para desenvolvimento(--watch, --debug) e inicia o banco de dados.
+$ docker-compose up api-development
 
-# e2e tests
-$ npm run test:e2e
+# roda a aplicação simulando o ambiente de produção(compila os arquivos para JS) e inicia o banco de dados.
+$ docker-compose up api-production
 
-# test coverage
-$ npm run test:cov
+# inicia o banco de dados
+$ docker-compose up database
 ```
 
-## Support
+# API
+HOST: https://back-end-meritt.herokuapp.com/
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+DOCS: http://back-end-meritt.herokuapp.com/api/
 
-## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+# Endpoints
+A documentação completa da API, com os endpoints, requests e responses estão disponíveis na [documentação](http://back-end-meritt.herokuapp.com/api/).
 
-## License
-
-Nest is [MIT licensed](LICENSE).
+|Métodos|Endpoint|Ação|
+|-------|--------|----|
+POST | /exams | Salva uma prova
+GET | /exams | Retorna todos as provas
+GET | /exams/:id | Retorna uma prova
+PUT | /exams/:id | Atualiza uma prova
+Delete | /exams/:id | Excluí uma prova
+POST | /exams/:id/questions | Salva uma questão para uma prova
+GET | /exams/:id/questions | Retorna todos as questões de uma prova
+GET | /questions/:id | Retorna uma questão
+PUT | /questions/:id | Atualiza uma questão
+Delete | /questions/:id | Excluí uma questão
+POST | /questions/:id/options | Salva uma opção/alternativa para uma questão
+GET | /questions/:id/options | Retorna todas as opções de uma questão
+GET | /options/:id | Retorna uma opção
+PUT | /options/:id | Atualiza uma opção
+Delete | /options/:id | Excluí uma opção
