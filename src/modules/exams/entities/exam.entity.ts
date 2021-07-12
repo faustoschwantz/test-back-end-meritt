@@ -23,5 +23,5 @@ export class Exam {
 
   @ApiProperty({ type: () => Question })
   @OneToMany(() => Question, (question) => question.exam)
-  questions: Question[];
+  questions?: Question[];
 }
