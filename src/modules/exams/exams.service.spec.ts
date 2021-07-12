@@ -1,3 +1,5 @@
+import { ExamType } from './../../shared/enums/exam-type';
+import { UpdateExamDto } from './dto/update-exam.dto';
 import { Exam } from './entities/exam.entity';
 import { createExamDtoMock, examListMock } from './../../shared/mocks/exams';
 import { Test, TestingModule } from '@nestjs/testing';
@@ -12,6 +14,7 @@ describe('ExamsService', () => {
     save: jest.fn(),
     find: jest.fn(),
     findOne: jest.fn(),
+    update: jest.fn(),
   };
 
   beforeAll(async () => {
@@ -33,6 +36,7 @@ describe('ExamsService', () => {
     examsRepositoryMock.save.mockReset();
     examsRepositoryMock.find.mockReset();
     examsRepositoryMock.findOne.mockReset();
+    examsRepositoryMock.update.mockReset();
   });
 
   it('should create a new exam', async () => {
@@ -61,5 +65,21 @@ describe('ExamsService', () => {
     const exam = await examsService.findOne(returnValue.id);
 
     expect(exam).toMatchObject(returnValue);
+  });
+
+  it('should update a exam', async (done) => {
+    const { id, name, description, type } = examListMock[0];
+    const updateDTO: UpdateExamDto = {
+      name,
+      description,
+      type: ExamType[type],
+    };
+
+    try {
+      await examsService.update(id, updateDTO);
+      done();
+    } catch (error) {
+      done(error);
+    }
   });
 });

@@ -1,4 +1,4 @@
 export enum ExamType {
-  OFFLINE,
-  ONLINE,
+  OFFLINE = 'ONLINE',
+  ONLINE = 'OFFLINE',
 }
