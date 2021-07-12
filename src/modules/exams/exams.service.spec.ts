@@ -1,7 +1,6 @@
 import { Exam } from './entities/exam.entity';
 import { createExamDtoMock, examListMock } from './../../shared/mocks/exams';
 import { Test, TestingModule } from '@nestjs/testing';
-import { QuestionsService } from '../questions/questions.service';
 import { ExamsService } from './exams.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
 
@@ -12,6 +11,7 @@ describe('ExamsService', () => {
     create: jest.fn(),
     save: jest.fn(),
     find: jest.fn(),
+    findOne: jest.fn(),
   };
 
   beforeAll(async () => {
@@ -32,6 +32,7 @@ describe('ExamsService', () => {
     examsRepositoryMock.create.mockReset();
     examsRepositoryMock.save.mockReset();
     examsRepositoryMock.find.mockReset();
+    examsRepositoryMock.findOne.mockReset();
   });
 
   it('should create a new exam', async () => {
@@ -51,5 +52,14 @@ describe('ExamsService', () => {
     const exams = await examsService.findAll();
 
     expect(exams).toHaveLength(3);
+  });
+
+  it('should find a exam', async () => {
+    const returnValue = examListMock[0];
+    examsRepositoryMock.findOne.mockReturnValue(returnValue);
+
+    const exam = await examsService.findOne(returnValue.id);
+
+    expect(exam).toMatchObject(returnValue);
   });
 });
