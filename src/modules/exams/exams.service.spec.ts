@@ -15,6 +15,7 @@ describe('ExamsService', () => {
     find: jest.fn(),
     findOne: jest.fn(),
     update: jest.fn(),
+    delete: jest.fn(),
   };
 
   beforeAll(async () => {
@@ -37,6 +38,7 @@ describe('ExamsService', () => {
     examsRepositoryMock.find.mockReset();
     examsRepositoryMock.findOne.mockReset();
     examsRepositoryMock.update.mockReset();
+    examsRepositoryMock.delete.mockReset();
   });
 
   it('should create a new exam', async () => {
@@ -77,6 +79,17 @@ describe('ExamsService', () => {
 
     try {
       await examsService.update(id, updateDTO);
+      done();
+    } catch (error) {
+      done(error);
+    }
+  });
+
+  it('should remove a exam', async (done) => {
+    const { id } = examListMock[0];
+
+    try {
+      await examsService.remove(id);
       done();
     } catch (error) {
       done(error);
