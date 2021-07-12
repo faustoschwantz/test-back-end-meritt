@@ -4,15 +4,15 @@ import { IsBoolean, IsNotEmpty, IsString } from 'class-validator';
 export class CreateOptionDto {
   @IsString()
   @IsNotEmpty()
-  @ApiProperty()
+  @ApiProperty({ example: 'a' })
   key: string;
 
   @IsString()
   @IsNotEmpty()
-  @ApiProperty()
+  @ApiProperty({ example: 'viver' })
   value: string;
 
   @IsBoolean()
-  @ApiProperty()
+  @ApiProperty({ example: true })
   correct: boolean;
 }

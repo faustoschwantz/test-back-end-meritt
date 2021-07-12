@@ -32,8 +32,8 @@ export class ExamsController {
   ) {}
 
   @Post()
-  @ApiCreatedResponse()
-  create(@Body() createExamDto: CreateExamDto) {
+  @ApiCreatedResponse({ type: Exam })
+  create(@Body() createExamDto: CreateExamDto): Promise<Exam> {
     return this.examsService.create(createExamDto);
   }
 

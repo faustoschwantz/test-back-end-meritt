@@ -9,15 +9,15 @@ export class Option {
   @ApiProperty()
   id: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: 'a' })
   @Column()
   key: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: 'viver' })
   @Column()
   value: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: true })
   @Column()
   correct: boolean;
 

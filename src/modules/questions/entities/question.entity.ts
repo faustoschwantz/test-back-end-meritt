@@ -12,7 +12,7 @@ export class Question {
   id: string;
 
   @Column()
-  @ApiProperty()
+  @ApiProperty({ example: 'Qual o sentido da vida, do universo e tudo mais?' })
   statement: string;
 
   @Column()

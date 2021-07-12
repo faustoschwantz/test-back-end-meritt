@@ -9,15 +9,16 @@ export class Exam {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: 'Prova AMARELA' })
   @Column()
   name: string;
 
+  @ApiProperty({ example: 'Prova completa' })
   @ApiProperty()
   @Column()
   description: string;
 
-  @ApiProperty({ enum: ExamType })
+  @ApiProperty({ enum: ExamType, example: ExamType.OFFLINE })
   @Column()
   type: string;
 
